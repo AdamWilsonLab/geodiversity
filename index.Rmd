@@ -4,13 +4,14 @@ subtitle: "Measuring Earth's Variability"
 ---
 
 # Description
-Overview of Geodiversity Products.  Blah blah.
+Early draft of remote sensing-derived _geodiversity_ Products.  Blah blah.
 
 
 ```{r, warning=F, message=F}
 library(googlesheets)
 library(dplyr)
 library(DT)
+library(htmlwidgets)
 
 ds=gs_key("1d3PPHV1rKS3cn81-15ptVzPw_3GNmIEyWJruwLfUPRQ")
 #d=gs_read(ds,ws="Original")
@@ -18,6 +19,7 @@ d=gs_read_listfeed(ds,ws="Original", verbose=FALSE)
 
 d2=d%>%
   mutate(Geodiversity=as.factor(Geodiversity),
+         Acronym=as.factor(Acronym),
          link=paste("<a href=",Link,">link</a>"))%>%
   select(-one_of("Spatial Resolution","Temporal Notes","Link", "Agency"))
 
