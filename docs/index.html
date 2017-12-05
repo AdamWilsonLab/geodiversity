@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Geodiversity Data Products</title>
+
+<script src="site_libs/jquery-1.12.4/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/htmlwidgets-0.9/htmlwidgets.js"></script>
+<script src="site_libs/datatables-binding-0.2/datatables.js"></script>
+<link href="site_libs/dt-core-1.10.12/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="site_libs/dt-core-1.10.12/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="site_libs/dt-core-1.10.12/js/jquery.dataTables.min.js"></script>
+<link href="site_libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet" />
+<script src="site_libs/nouislider-7.0.10/jquery.nouislider.min.js"></script>
+<link href="site_libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet" />
+<script src="site_libs/selectize-0.12.0/selectize.min.js"></script>
+<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlightingOnLoad(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Geodiversity</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/adammwilsonlab/geodiversity">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Geodiversity Data Products</h1>
+<h3 class="subtitle"><em>Measuring Earth’s Variability</em></h3>
+
+</div>
+
+
+<div id="description" class="section level1">
+<h1>Description</h1>
+<p>Overview of Geodiversity Products. Blah blah.</p>
+<pre class="r"><code>library(googlesheets)
+library(dplyr)
+library(DT)
+
+ds=gs_key(&quot;1d3PPHV1rKS3cn81-15ptVzPw_3GNmIEyWJruwLfUPRQ&quot;)
+#d=gs_read(ds,ws=&quot;Original&quot;)
+d=gs_read_listfeed(ds,ws=&quot;Original&quot;, verbose=FALSE)
+
+d2=d%&gt;%
+  mutate(Geodiversity=as.factor(Geodiversity),
+         link=paste(&quot;&lt;a href=&quot;,Link,&quot;&gt;link&lt;/a&gt;&quot;))%&gt;%
+  select(-one_of(&quot;Spatial Resolution&quot;,&quot;Temporal Notes&quot;,&quot;Link&quot;, &quot;Agency&quot;))
+
+d2%&gt;%datatable(
+  filter = &#39;top&#39;, 
+  escape = F,
+  options = list(
+    pageLength = 50, autoWidth = TRUE
+  ),
+  class = &#39;cell-border stripe&#39;,
+  caption = &#39;Table 1: Master Table of All Good Things&#39;
+  )</code></pre>
+<div id="htmlwidget-98c5661b69c7bdee37eb" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-98c5661b69c7bdee37eb">{"x":{"filter":"top","filterHTML":"<tr>\n  <td><\/td>\n  <td data-type=\"factor\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"width: 100%; display: none;\">\n      <select multiple=\"multiple\" style=\"width: 100%;\" data-options=\"[&quot;?? link isn&#39;t active&quot;,&quot;Atmospheric Temperature, Atmospheric Moisture&quot;,&quot;Ground Water Storage&quot;,&quot;Ice, Cloud, and Land Elevation; Ice Mass and Thickness&quot;,&quot;Ocean Near-Surface Wind Speed and Direction&quot;,&quot;Ocean Surface Wind Speed and Roughness&quot;,&quot;Precipitation&quot;,&quot;Precipitation, Oceanic Water Vapor, Cloud Water, Near-Surface Wind Speed, Soil Moisture, Snow Cover, Sea Ice parameters. (Post-processed ocean product suite consists of: Sea Surface Temperature, Surface Wind Speeds (low and medium frequency), Atmospheric Water Vapor, Cloud Liquid Water, and Rain Rate),&quot;,&quot;profile measurements of atmospheric aerosols and clouds&quot;,&quot;Rainfall&quot;,&quot;Soil Moisture&quot;,&quot;Surface Reflectance&quot;,&quot;Surface Reflectance (Land, Atmosphere, Cryosphere, Ocean)&quot;,&quot;Surface Temperature, Biophysical Variables, Heat and Moisture Stress, Species Composition, Vegetation Structure&quot;,&quot;Surface Topography&quot;,&quot;Surface Topography, Forest canopy height, Canopy vertical structure&quot;,&quot;Surface Topography, Topography beneath ice and snow, Topographic Change (volcanoes, earthquake), Soil Moisture, Oceanography (surficial and near-surface features), Vegetation Cover&quot;,&quot;Surface Topography, Vegetation Cover&quot;,&quot;Terrain Beneath Canopies, 3D Canopy Structure&quot;,&quot;Terrain Beneath Canopies, Top Vegetation Canopies&quot;]\"><\/select>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"integer\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"1\" data-max=\"1000000\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","caption":"<caption>Table 1: Master Table of All Good Things<\/caption>","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30"],["Surface Topography","Soil Moisture","Soil Moisture","Rainfall","Precipitation","Surface Reflectance (Land, Atmosphere, Cryosphere, Ocean)","Ground Water Storage","Surface Topography","Surface Reflectance","Surface Temperature, Biophysical Variables, Heat and Moisture Stress, Species Composition, Vegetation Structure","Surface Topography, Vegetation Cover","Terrain Beneath Canopies, Top Vegetation Canopies","Terrain Beneath Canopies, 3D Canopy Structure","Surface Topography, Topography beneath ice and snow, Topographic Change (volcanoes, earthquake), Soil Moisture, Oceanography (surficial and near-surface features), Vegetation Cover","Surface Topography, Forest canopy height, Canopy vertical structure","Precipitation, Oceanic Water Vapor, Cloud Water, Near-Surface Wind Speed, Soil Moisture, Snow Cover, Sea Ice parameters. (Post-processed ocean product suite consists of: Sea Surface Temperature, Surface Wind Speeds (low and medium frequency), Atmospheric Water Vapor, Cloud Liquid Water, and Rain Rate),","Ocean Near-Surface Wind Speed and Direction","?? link isn't active","Atmospheric Temperature, Atmospheric Moisture","Ocean Surface Wind Speed and Roughness","Ice, Cloud, and Land Elevation; Ice Mass and Thickness",null,"profile measurements of atmospheric aerosols and clouds",null,null,null,null,null,null,null],["SRTM","SMAP","SMAP","TRMM","GPM","MODIS","GRACE","ASTER GDEM","Landsat","G-LiHT","LVIS","GeoSAR","SLICER","UAVSAR","GEDI","AMSR*","QSCAT","CERES","ATMS","CYGNSS","ICESat-2","CALIOP","CATS","ASTER","VIIRS","AVHRR","MASTER","HYPERION","AVIRIS","HyTES"],["Shuttle Radar Topography Mission","Soil Moisture Active/Passive","Soil Moisture Active/Passive","Tropical Rainfall Measuring Mission","Global Precipitation Measurement","Moderate Resolution Imaging Spectrometer","Gravity Recovery and Climate Experiment","Global Digital Elevation Model","Landsat 1-8 (Multi Spectral Scanner (MSS), Thematic Mapper (TM), Enhanced Thematic Mapper Plus (ETM+), Operational Land Imager (OLI), Thermal InfraRed Sensor (TIRS))","Goddard's LiDAR, Hyperspectral & Thermal Imager","NASA's Land, Vegetation, and Ice Sensor (a.k.a. the Laser Vegetation Imaging Sensor)","Geographic Synthetic Aperture Radar","Scanning Lidar Imager of Canopies by Echo Recovery","Uninhabited Aerial Vehicle Synthetic Aperture Radar","Global Ecosystem Dynamics Investigation","Advanced Microwave Scanning Radiometer (on-board ADEOS-II, Aqua, and GCOM-W1)","Quick Scatterometer (SeaWinds instrument)","Clouds and the Earth's Radiant Energy System","Advanced Technology Microwave Sounder","Cyclone Global Navigation Satellite System","Ice, Cloud, and land Elevation Satellite 2","Cloud-Aerosol Lidar with Orthogonal Polarization","Cloud-Aerosol Transport System","Advanced Spaceborne Thermal Emission and Reflection Radiometer","Visible Infrared Imaging Radiometer Suite","Advanced Very High Resolution Radiometer","MODIS/ASTER airborne simulator",null,"Airborne Visible/Infrared Imaging Spectrometer","Hyperspectral Thermal Emission Spectrometer"],[30,36,9000,250000,10000,1000,1000000,30,30,1,25,2,10,8,25,4,5,10,35,5,14,333,350,15,750,1100,10,30,20,60],["60N to 56S deg lat","global low-veg cover","global low-veg cover","35N to 35S deg lat","Global","Global","Global","Global","Global","None-Airborne","None-Airborne","None-Airborne","None-Airborne","None-Airborne","51.6N to 51.6S deg lat","Global","Global","Global","Global","35N to 35S deg lat","Global","Global","51.6N to 51.6S deg lat","Global","Global","Global","None-Airborne","Global","None-Airborne","None-Airborne"],["None - Single time point","8 days","8 days","3 hours - daily","30 min","Daily","monthly","None - Single time point","16 days","None-Airborne","None-Airborne","None-Airborne","None-Airborne","None-Airborne","3 days - ISS (not yet launched)","12 hours","4 days","16 days","16 days","hours-days","91 days","16 days","3 days - ISS","16 days","16 days","29 days","None-Airborne","None-on demand (16 days)","None-Airborne","None-Airborne"],["2000","3/31/2015","4/13/2015","1/1/1998","2/27/2014","2/24/2000","4/1/2000","2009","1972","2011","1998","1996","1994","2009","2018","2002","1999","1997","2011","2016","2017","2006","2015","1999","2011","1978","1999","2000","1986","2012"],[null,null,"7/7/2015","4/15/2015",null,null,null,"2011",null,null,null,null,"1997",null,null,null,"2009",null,null,null,null,null,null,null,null,null,null,null,null,null],["<a href= https://www2.jpl.nasa.gov/srtm/ >link<\/a>","<a href= https://smap.jpl.nasa.gov/ >link<\/a>","<a href= https://smap.jpl.nasa.gov/ >link<\/a>","<a href= https://trmm.gsfc.nasa.gov/ >link<\/a>","<a href= https://www.nasa.gov/mission_pages/GPM/main/index.html >link<\/a>","<a href= https://modis.gsfc.nasa.gov/data/dataprod/ >link<\/a>","<a href= http://svs.gsfc.nasa.gov/4338 >link<\/a>","<a href= https://asterweb.jpl.nasa.gov/gdem.asp >link<\/a>","<a href= https://landsat.gsfc.nasa.gov/ >link<\/a>","<a href= https://gliht.gsfc.nasa.gov/ >link<\/a>","<a href= https://lvis.gsfc.nasa.gov/ >link<\/a>","<a href= https://directory.eoportal.org/web/eoportal/airborne-sensors/geosar >link<\/a>","<a href= https://denali.gsfc.nasa.gov/research/laser/slicer/slicer.html >link<\/a>","<a href= https://uavsar.jpl.nasa.gov/ >link<\/a>","<a href= https://science.nasa.gov/missions/gedi >link<\/a>","<a href= https://earthdata.nasa.gov/about/science-investigator-led-processing-systems/sips-amsr-e-2 >link<\/a>","<a href= https://winds.jpl.nasa.gov/missions/quikscat/ >link<\/a>","<a href= https://ceres.larc.nasa.gov/ >link<\/a>","<a href= https://jointmission.gsfc.nasa.gov/atms.html >link<\/a>","<a href= https://www.nasa.gov/cygnss/ >link<\/a>","<a href= https://icesat-2.gsfc.nasa.gov/ >link<\/a>","<a href= https://www-calipso.larc.nasa.gov/about/payload.php >link<\/a>","<a href= https://cats.gsfc.nasa.gov/ >link<\/a>","<a href= https://asterweb.jpl.nasa.gov/ >link<\/a>","<a href= https://jointmission.gsfc.nasa.gov/viirs.html >link<\/a>","<a href= https://podaac.jpl.nasa.gov/AVHRR-Pathfinder >link<\/a>","<a href= https://masterweb.jpl.nasa.gov/ >link<\/a>","<a href= https://eo1.usgs.gov/sensors/hyperion >link<\/a>","<a href= https://aviris-ng.jpl.nasa.gov/index.html >link<\/a>","<a href= https://hytes.jpl.nasa.gov/ >link<\/a>"]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Geodiversity<\/th>\n      <th>Acronym<\/th>\n      <th>Product and Mission Name<\/th>\n      <th>Spatial Resolution (m)<\/th>\n      <th>Spatial Extent<\/th>\n      <th>Temporal Resolution<\/th>\n      <th>Temporal Extent (start)<\/th>\n      <th>Temporal Extent (stop)<\/th>\n      <th>link<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":50,"autoWidth":true,"columnDefs":[{"className":"dt-right","targets":4},{"orderable":false,"targets":0}],"order":[],"orderClasses":false,"orderCellsTop":true}},"evals":[],"jsHooks":[]}</script>
+</div>
+
+
+<!-- give the footer some space -->
+<br/>
+<br/>
+
+<footer id="site-footer">
+  <div id="footer1">
+  </div>
+  <div id="footer2">
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
+  </div>
+</footer>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+
+</body>
+</html>
